@@ -40,14 +40,14 @@ bad blocks, and *truecrypt.sh* to generate the device-mapper device.
 
 A sample usage would be:
 
-mke2fs <device>
-bash ./badblocks.sh <device> <size> > /tmp/badblocks.lst
-e2fsck -L /tmp/badblocks.lst <device>
-bash ./truecrypt.sh <device>
+    mke2fs <device>
+    bash ./badblocks.sh <device> <size> > /tmp/badblocks.lst
+    e2fsck -L /tmp/badblocks.lst <device>
+    bash ./truecrypt.sh <device>
 
-which will create two device-mapper devices, 'tcrypt_orig' for the filesystem
-on <device>, and 'tcrypt' for the deniable device located within the
-filesystem on <device>.
+which will create two device-mapper devices, `tcrypt_orig` for the filesystem
+on **<device>**, and `tcrypt` for the deniable device located within the
+filesystem on **<device>**.
 
 
 Then we can create a device-mapper device using these blocks.

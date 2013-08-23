@@ -46,8 +46,8 @@ A sample usage would be:
     bash ./truecrypt.sh <device>
 
 which will create two device-mapper devices, `tcrypt_orig` for the filesystem
-on **<device>**, and `tcrypt` for the deniable device located within the
-filesystem on **<device>**.
+on `<device>`, and `tcrypt` for the deniable device located within the
+filesystem on `<device>`.
 
 
 Then we can create a device-mapper device using these blocks.

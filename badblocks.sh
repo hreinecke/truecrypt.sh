@@ -33,6 +33,15 @@
 # THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+function usage()
+{
+cat << EOF
+Usage: $0 <device> <size>
+
+Generate a list of bad blocks of device <device> of total size <size> Bytes.
+EOF
+}
+
 rand() {
     local devsize=$1
     local r
@@ -53,6 +62,11 @@ rand() {
     ret=$(( ret % devsize ))
     echo $ret
 }
+
+if [[ $BASH_ARGC -lt 2 ]] ; then
+    usage;
+    exit 1;
+fi
 
 dev=$1
 if [ ! -b $dev ] ; then

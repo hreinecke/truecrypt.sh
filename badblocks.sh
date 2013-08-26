@@ -83,11 +83,28 @@ if [ -z "$blksize" ] || [ $blksize -eq 0 ] ; then
     exit 1
 fi
 
-blkmult=$(( 1024 / blksize ))
+# Calculate number of blocks
+case $blksize in
+    512)
+	blks=$(( tsize * 2 ))
+	;;
+    1024)
+	blks=$(( tsize ))
+	;;
+    2048)
+	blks=$(( tsize / 2 ))
+	;;
+    4096)
+	blks=$(( tsize / 4 ))
+	;;
+    *)
+	echo "Unhandled blocksize $blksize on device $dev"
+	exit 1
+	;;
+esac
 
 freelist=$(dumpe2fs $dev 2> /dev/null | sed -n 's/^  Free blocks: \([0-9]*-[0-9]*\)/\1/p')
 
-blks=$(( tsize * blkmult ))
 while (( $blks )) ; do
     bnum=$(rand $devsize)
     for f in $freelist ; do
